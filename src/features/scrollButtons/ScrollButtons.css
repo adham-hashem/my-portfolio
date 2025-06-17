@@ -1,0 +1,46 @@
+.scroll-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.scroll-button {
+  background: linear-gradient(45deg, #0a3d62 0%, #e8b923 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(232, 185, 35, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-button:hover {
+  background: linear-gradient(45deg, #e8b923 0%, #0a3d62 100%);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(232, 185, 35, 0.6);
+}
+
+@media (max-width: 768px) {
+  .scroll-buttons {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .scroll-button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
