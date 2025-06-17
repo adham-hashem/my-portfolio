@@ -12,7 +12,7 @@
 }
 
 .main-content {
-  height: calc(100vh - 50px);
+  height: 100vh; /* Use 100vh with dynamic adjustment */
   position: relative;
   display: flex;
   flex-direction: column;
@@ -29,6 +29,7 @@
   background-size: 200% 200%;
   animation: gradientShift 15s ease infinite;
   overflow: hidden;
+  min-height: -webkit-fill-available; /* Fallback for mobile browsers */
 }
 
 .particle-canvas {

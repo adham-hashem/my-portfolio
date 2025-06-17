@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { gsap } from "gsap";
@@ -12,7 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const HomePage: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerHeight, setContainerHeight] = React.useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
   const mainContentRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<HTMLElement[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -29,22 +29,27 @@ const HomePage: React.FC = () => {
     }
   };
 
-  // Scroll to top on initial load
+  // Scroll to top and stabilize viewport
   useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    window.scrollTo({ top: 0, behavior: "auto" });
-
-    const timer = setTimeout(() => {
+    const handleResize = () => {
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
       window.scrollTo({ top: 0, behavior: "auto" });
-    }, 100);
+      if (containerRef.current) {
+        setContainerHeight(containerRef.current.scrollHeight);
+      }
+    };
 
-    return () => clearTimeout(timer);
+    handleResize(); // Initial call
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("load", handleResize); // Ensure load event triggers resize
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("load", handleResize);
+    };
   }, []);
 
-  // Update container height
+  // Update container height on resize
   useEffect(() => {
     const updateHeight = () => {
       if (containerRef.current) {
@@ -59,13 +64,13 @@ const HomePage: React.FC = () => {
   // Framer Motion animation for text (up and down)
   useEffect(() => {
     if (isInView) {
-      // Text up-down animation
       textControls.start({
         y: [-10, 10, -10],
         transition: {
           repeat: Infinity,
           duration: 3, // Slower animation
           ease: "easeInOut",
+          delay: 0.1, // Small delay to allow layout stabilization
         },
       });
     }
@@ -85,6 +90,9 @@ const HomePage: React.FC = () => {
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      if (mainContentRef.current) {
+        mainContentRef.current.style.height = `${window.innerHeight}px`; // Sync with viewport
+      }
     };
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
