@@ -52,9 +52,8 @@
 }
 
 .main-content-h1-container {
-  border-right: 2px solid var(--accent-color);
+  position: relative;
   width: fit-content;
-  animation: blinkCursor 0.8s infinite;
   z-index: 3;
 }
 
@@ -182,7 +181,7 @@ section {
     font-size: 1.5rem;
   }
   .main-content {
-    background-size: 300% 300%; /* Slower animation on mobile */
+    background-size: 300% 300%;
     animation: gradientShift 20s ease infinite;
   }
 }
@@ -203,12 +202,6 @@ section {
   }
   100% {
     background-position: 0% 50%;
-  }
-}
-
-@keyframes blinkCursor {
-  50% {
-    border-color: transparent;
   }
 }
 

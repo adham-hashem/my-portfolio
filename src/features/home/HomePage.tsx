@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { motion, useAnimation, useInView } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./HomePage.css";
@@ -10,14 +11,16 @@ import ScrollButtons from "../scrollButtons/ScrollButtons";
 gsap.registerPlugin(ScrollTrigger);
 
 const HomePage: React.FC = () => {
-  const [typedText, setTypedText] = useState("");
-  const text = "Adham Hashem";
-  const speed = 100;
   const containerRef = useRef<HTMLDivElement>(null);
-  const [containerHeight, setContainerHeight] = useState(0);
+  const [containerHeight, setContainerHeight] = React.useState(0);
   const mainContentRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<HTMLElement[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  // Framer Motion controls for text
+  const textControls = useAnimation();
+  const isInView = useInView(textRef, { once: false });
 
   // Add refs to sections
   const addToSectionRefs = (el: HTMLElement | null) => {
@@ -53,18 +56,20 @@ const HomePage: React.FC = () => {
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
-  // Typing animation
+  // Framer Motion animation for text (up and down)
   useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      setTypedText(text.slice(0, index + 1));
-      index++;
-      if (index === text.length) {
-        clearInterval(interval);
-      }
-    }, speed);
-    return () => clearInterval(interval);
-  }, []);
+    if (isInView) {
+      // Text up-down animation
+      textControls.start({
+        y: [-10, 10, -10],
+        transition: {
+          repeat: Infinity,
+          duration: 3, // Slower animation
+          ease: "easeInOut",
+        },
+      });
+    }
+  }, [isInView, textControls]);
 
   // Particle background
   useEffect(() => {
@@ -75,9 +80,8 @@ const HomePage: React.FC = () => {
     if (!ctx) return;
 
     const particles: { x: number; y: number; vx: number; vy: number; radius: number }[] = [];
-    const particleCount = 50; // Low count for performance
+    const particleCount = 50;
 
-    // Set canvas size
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -85,7 +89,6 @@ const HomePage: React.FC = () => {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
 
-    // Initialize particles
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
@@ -96,20 +99,18 @@ const HomePage: React.FC = () => {
       });
     }
 
-    // Animate particles
     const animateParticles = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((p) => {
         p.x += p.vx;
         p.y += p.vy;
 
-        // Bounce off edges
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(232, 185, 35, 0.6)"; // Match --accent-color
+        ctx.fillStyle = "rgba(232, 185, 35, 0.6)";
         ctx.fill();
       });
       requestAnimationFrame(animateParticles);
@@ -121,9 +122,8 @@ const HomePage: React.FC = () => {
     };
   }, []);
 
-  // GSAP animations
+  // GSAP animations for other sections
   useEffect(() => {
-    // Main content animation
     if (mainContentRef.current) {
       gsap.fromTo(
         mainContentRef.current,
@@ -132,7 +132,6 @@ const HomePage: React.FC = () => {
       );
     }
 
-    // Section animations
     sectionRefs.current.forEach((section) => {
       const img = section.querySelector("img");
       const text = section.querySelectorAll("h2, p");
@@ -186,8 +185,14 @@ const HomePage: React.FC = () => {
         <div className="main-content" ref={mainContentRef}>
           <canvas ref={canvasRef} className="particle-canvas"></canvas>
           <div className="overlay"></div>
-          <div className="main-content-h1-container">
-            <h1 className="main-content-h1">{typedText}</h1>
+          <div className="main-content-h1-container" ref={textRef}>
+            <motion.h1
+              className="main-content-h1"
+              animate={textControls}
+              initial={{ y: 0 }}
+            >
+              ADHAM HASHEM
+            </motion.h1>
           </div>
           <p className="main-content-p">
             .NET Backend Developer & Cybersecurity Researcher
@@ -374,4 +379,3 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-
