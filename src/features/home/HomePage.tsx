@@ -29,27 +29,20 @@ const HomePage: React.FC = () => {
     }
   };
 
-  // Scroll to top and stabilize viewport
+  // Scroll to top only on initial mount
   useEffect(() => {
-    const handleResize = () => {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      window.scrollTo({ top: 0, behavior: "auto" });
-      if (containerRef.current) {
-        setContainerHeight(containerRef.current.scrollHeight);
-      }
-    };
+    // Set scroll position to top on initial mount
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: "auto" });
 
-    handleResize(); // Initial call
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("load", handleResize); // Ensure load event triggers resize
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("load", handleResize);
-    };
+    // Set initial container height
+    if (containerRef.current) {
+      setContainerHeight(containerRef.current.scrollHeight);
+    }
   }, []);
 
-  // Update container height on resize
+  // Update container height on resize without affecting scroll position
   useEffect(() => {
     const updateHeight = () => {
       if (containerRef.current) {

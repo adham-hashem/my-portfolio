@@ -80,7 +80,7 @@ const Footer = () => {
         </Link>
       </div>
       <div ref={socialsRef} className="mb-4 social-icons">
-        <a href="" target="_blank" rel="noopener noreferrer">
+        {/* <a href="" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon
             icon={faInstagram}
             className="footer-icon"
@@ -93,8 +93,8 @@ const Footer = () => {
             className="footer-icon"
             style={{ color: "#b09439", fontSize: "25px" }}
           />
-        </a>
-        <a href="https://wa.me/01028110927" target="_blank" rel="noopener noreferrer">
+        </a> */}
+        <a href="https://wa.me/+201028110927" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon
             icon={faWhatsapp}
             className="footer-icon"
