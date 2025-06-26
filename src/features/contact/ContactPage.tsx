@@ -144,11 +144,11 @@ const ContactPage = () => {
           <ul className="list-unstyled ms-4">
             <li className="mb-2">
               <i className="fas fa-envelope mr-2" style={{ color: "#e8b923" }}></i>
-              <strong>Email:</strong> adham.hashem@example.com
+              <strong>Email:</strong> adhamhashem2025@gmail.com
             </li>
             <li className="mb-2">
               <i className="fas fa-phone mr-2" style={{ color: "#e8b923" }}></i>
-              <strong>Phone:</strong> +20-102-811-0927
+              <strong>Phone:</strong> +201028110927
             </li>
             <li className="mb-2">
               <i className="fas fa-map-marker-alt mr-2" style={{ color: "#e8b923" }}></i>

@@ -185,12 +185,40 @@ section {
     background-size: 300% 300%;
     animation: gradientShift 20s ease infinite;
   }
+  /* Center images on mobile */
+  section img {
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 @media (min-width: 769px) {
   section {
     margin-left: 3rem;
     margin-right: 3rem;
+  }
+}
+
+/* Hide both by default */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: none;
+}
+
+/* Show on mobile (width ≤ 768px) */
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+}
+
+/* Show on desktop (width ≥ 769px) */
+@media (min-width: 769px) {
+  .desktop-only {
+    display: block;
   }
 }
 

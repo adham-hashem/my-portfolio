@@ -173,11 +173,11 @@ function Header() {
                 About
               </Link>
             </li>
-            <li className="nav-item" ref={addToNavItemsRef}>
+            {/* <li className="nav-item" ref={addToNavItemsRef}>
               <Link className="nav-link" to="/projects">
                 Projects
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item" ref={addToNavItemsRef}>
               <Link className="nav-link" to="/certificates">
                 Certificates

@@ -122,7 +122,7 @@ const AboutPage = () => {
             About Adham Hashem
           </h2>
           <p className="lead">
-            I'm a passionate .NET Backend Developer and Cybersecurity Researcher based in Cairo, Egypt. With a focus on building robust, secure, and scalable applications, I combine technical expertise with a deep understanding of cybersecurity to deliver innovative solutions.
+            I'm a passionate .NET Backend Developer and Cybersecurity Student based in Damietta, Egypt.
           </p>
         </section>
 
@@ -134,20 +134,20 @@ const AboutPage = () => {
                 Background & Expertise
               </h2>
               <p>
-                I hold a degree in Computer Science from [Your University], where I developed a strong foundation in software engineering and cybersecurity. My professional journey includes working on enterprise-level backend systems using .NET Core and C#, as well as conducting penetration testing and threat analysis to secure applications.
+                I developed a strong foundation in software engineering and cybersecurity. My professional journey includes working on enterprise-level backend systems using .NET Core and C#.
               </p>
               <ul className="list-unstyled ms-4">
                 <li className="mb-2">
                   <i className="fas fa-code mr-2" style={{ color: "#e8b923" }}></i>
-                  <strong>Backend Development:</strong> .NET Core, C#, Node.js, Python, SQL/NoSQL databases
+                  <strong>Backend Development:</strong> .NET Core, C#, PHP, SQL databases
                 </li>
                 <li className="mb-2">
                   <i className="fas fa-shield-alt mr-2" style={{ color: "#e8b923" }}></i>
-                  <strong>Cybersecurity:</strong> Penetration testing, secure coding, threat analysis
+                  <strong>Cybersecurity:</strong> secure coding
                 </li>
                 <li className="mb-2">
                   <i className="fas fa-cloud mr-2" style={{ color: "#e8b923" }}></i>
-                  <strong>Cloud Technologies:</strong> Azure, AWS
+                  <strong>Cloud Technologies:</strong> Azure
                 </li>
               </ul>
             </div>
@@ -161,7 +161,7 @@ const AboutPage = () => {
           </div>
         </section>
 
-        <section ref={addToSectionRefs} className="mb-5">
+        {/* <section ref={addToSectionRefs} className="mb-5">
           <h2 className="mb-3">
             <i className="fas fa-trophy mr-2" style={{ color: "#e8b923" }}></i>
             Achievements
@@ -180,7 +180,7 @@ const AboutPage = () => {
               Contributed to open-source projects, including [Your Project], enhancing community-driven development.
             </li>
           </ul>
-        </section>
+        </section> */}
 
         <section ref={addToSectionRefs} className="mb-5">
           <h2 className="mb-3">
@@ -188,7 +188,7 @@ const AboutPage = () => {
             Personal Interests
           </h2>
           <p>
-            Beyond coding and cybersecurity, I enjoy exploring new technologies, contributing to open-source communities, and staying active through [your hobbies, e.g., hiking, chess, or reading]. I'm also passionate about mentoring aspiring developers and sharing knowledge through blogs and talks.
+            Beyond coding and cybersecurity, I enjoy exploring new technologies, and staying active through chess, reading and more. I'm also passionate about mentoring aspiring developers and sharing knowledge through blogs and talks.
           </p>
         </section>
 

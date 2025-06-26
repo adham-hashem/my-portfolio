@@ -203,7 +203,7 @@ const HomePage: React.FC = () => {
             </motion.h1>
           </div>
           <p className="main-content-p">
-            .NET Backend Developer & Cybersecurity Researcher
+            .NET Backend Developer & Cybersecurity Student
           </p>
           <div className="social-icons">
             <a
@@ -222,15 +222,15 @@ const HomePage: React.FC = () => {
             >
               <i className="fab fa-linkedin"></i>
             </a>
-            <Link to="/projects" className="social-icon">
+            {/* <Link to="/projects" className="social-icon">
               <i className="fas fa-briefcase"></i>
-            </Link>
+            </Link> */}
           </div>
           <div className="button-container">
-            <Link to="/projects" className="btn-grad">
+            {/* <Link to="/projects" className="btn-grad">
               View Projects
-            </Link>
-            <a href="mailto:adham.hashem@example.com" className="btn-grad">
+            </Link> */}
+            <a href="mailto:adhamhashem2025@gmail.com" className="btn-grad">
               Contact Me
             </a>
           </div>
@@ -248,7 +248,7 @@ const HomePage: React.FC = () => {
                   About <span className="main-color">Me</span>
                 </h2>
                 <p className="text-white mb-5">
-                  I'm Adham Hashem, a passionate Backend Developer and Cybersecurity Researcher. With expertise in building robust server-side applications and securing digital infrastructures, I strive to create efficient and secure solutions that drive innovation.
+                  I'm Adham Hashem, a passionate Backend Developer and Cybersecurity Student. With expertise in building robust server-side applications and securing digital infrastructures, I strive to create efficient and secure solutions that drive innovation.
                 </p>
                 <Link to="/about" className="btn py-2 px-5 learn-more-button">
                   Learn More
@@ -256,15 +256,16 @@ const HomePage: React.FC = () => {
               </div>
               <div className="col-md-6">
                 <img
-                  src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80"
+                  src="images/Me.jpg"
                   className="img-fluid rounded shadow-lg"
                   alt="Adham Hashem"
+                  style={{ maxWidth: "80%", height: "auto" }}
                 />
               </div>
             </div>
           </section>
 
-          <section ref={addToSectionRefs} style={{ paddingBottom: "20px" }}>
+          <section ref={addToSectionRefs} style={{ paddingBottom: "20px" }} className="desktop-only">
             <div className="row">
               <div className="col-md-6">
                 <img
@@ -276,104 +277,26 @@ const HomePage: React.FC = () => {
               <div className="col-md-6 mb-2">
                 <h2 className="text-white mb-3 mt-3">My Skills</h2>
                 <p className="text-white mb-2">
-                  Proficient in Node.js, Python, Java, and database management (SQL/NoSQL). Experienced in cybersecurity practices, including penetration testing, threat analysis, and secure coding.
+                  Proficient in C++, Python, PHP, C#, SQL database management and more. Experienced in cybersecurity practices, including secure coding.
                 </p>
               </div>
             </div>
           </section>
 
-          <section
-            ref={addToSectionRefs}
-            className="div-background-color rounded-div mx-2"
-            style={{ padding: "80px 40px 40px 40px" }}
-          >
-            <h2 className="text-white text-center mb-5">
-              Recent <span className="main-color">Projects</span>
-            </h2>
+          <section ref={addToSectionRefs} style={{ paddingBottom: "20px" }} className="mobile-only">
             <div className="row">
-              <div className="col-md-6 mb-4">
-                <h3 className="text-white mb-3">Secure API Platform</h3>
-                <p className="text-white mb-3">
-                  Developed a scalable RESTful API using .NET Core, integrated with OAuth 2.0 for secure authentication and deployed on Azure.
+              <div className="col-md-6 mb-2">
+                <h2 className="text-white mb-3 mt-3">My Skills</h2>
+                <p className="text-white mb-2">
+                  Proficient in C++, Python, PHP, C#, SQL database management and more. Experienced in cybersecurity practices, including secure coding.
                 </p>
-                <Link to="/projects" className="btn py-2 px-5 learn-more-button">
-                  View Details
-                </Link>
               </div>
-              <div className="col-md-6 mb-4">
+              <div className="col-md-6">
                 <img
                   src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80"
                   className="img-fluid rounded shadow-lg"
-                  alt="Secure API Platform"
+                  alt="Skills"
                 />
-              </div>
-              <div className="col-md-6 mb-4">
-                <img
-                  src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80"
-                  className="img-fluid rounded shadow-lg"
-                  alt="Cybersecurity Dashboard"
-                />
-              </div>
-              <div className="col-md-6 mb-4">
-                <h3 className="text-white mb-3">Cybersecurity Dashboard</h3>
-                <p className="text-white mb-3">
-                  Built a real-time threat monitoring dashboard using Python and MongoDB, with automated penetration testing scripts.
-                </p>
-                <Link to="/projects" className="btn py-2 px-5 learn-more-button">
-                  View Details
-                </Link>
-              </div>
-            </div>
-          </section>
-
-          <section
-            ref={addToSectionRefs}
-            className="mx-2"
-            style={{ padding: "80px 0 40px 0" }}
-          >
-            <h2 className="text-white text-center mb-5">
-              Blog & <span className="main-color">Insights</span>
-            </h2>
-            <div className="row">
-              <div className="col-md-6 mb-4">
-                <h3 className="text-white mb-3">Securing APIs with .NET Core</h3>
-                <p className="text-white mb-3">
-                  Learn best practices for implementing secure authentication and authorization in .NET Core APIs.
-                </p>
-                <Link to="/blog" className="btn py-2 px-5 learn-more-button">
-                  Read More
-                </Link>
-              </div>
-              <div className="col-md-6 mb-4">
-                <h3 className="text-white mb-3">Penetration Testing 101</h3>
-                <p className="text-white mb-3">
-                  A beginner's guide to conducting effective penetration tests to identify vulnerabilities in web applications.
-                </p>
-                <Link to="/blog" className="btn py-2 px-5 learn-more-button">
-                  Read More
-                </Link>
-              </div>
-            </div>
-          </section>
-
-          <section
-            ref={addToSectionRefs}
-            className="mx-2"
-            style={{ padding: "80px 0 30px 0" }}
-          >
-            <div className="row">
-              <div className="col-md-12 mb-5">
-                <h2 className="text-white text-center mb-5">
-                  Explore My Work
-                </h2>
-                <p className="text-white text-center mb-5">
-                  Check out my projects to see how I combine backend development and cybersecurity to build impactful solutions.
-                </p>
-                <div className="text-center">
-                  <Link to="/projects" className="btn py-2 px-5 learn-more-button">
-                    View Projects
-                  </Link>
-                </div>
               </div>
             </div>
           </section>
