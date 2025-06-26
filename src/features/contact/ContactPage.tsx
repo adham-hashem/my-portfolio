@@ -13,6 +13,10 @@ const ContactPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [formStatus, setFormStatus] = useState<string>("");
 
+  useEffect(() => {
+  window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
   // Add refs to sections
   const addToSectionRefs = (el: HTMLElement | null) => {
     if (el && !sectionRefs.current.includes(el)) {
