@@ -22,6 +22,15 @@
   color: #e8b923;
 }
 
+.about-page .list-unstyled li a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.about-page .list-unstyled li a:hover {
+  color: #e8b923;
+}
+
 .about-page h2 {
   font-size: 2rem;
   font-weight: bold;

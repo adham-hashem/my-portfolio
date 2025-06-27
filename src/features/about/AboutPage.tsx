@@ -42,7 +42,7 @@ const AboutPage = () => {
   useEffect(() => {
     sectionRefs.current.forEach((section) => {
       const heading = section.querySelector("h2");
-      const content = section.querySelectorAll("p, ul, li");
+      const content = section.querySelectorAll("p, ul, li, a");
       const image = section.querySelector("img");
 
       // Heading animation
@@ -134,7 +134,7 @@ const AboutPage = () => {
                 Background & Expertise
               </h2>
               <p>
-                I developed a strong foundation in software engineering and cybersecurity. My professional journey includes working on enterprise-level backend systems using .NET Core and C#.
+                I developed a strong foundation in software engineering and cybersecurity. My professional journey includes working on backend systems using .NET Core and C#.
               </p>
               <ul className="list-unstyled ms-4">
                 <li className="mb-2">
@@ -161,26 +161,29 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* <section ref={addToSectionRefs} className="mb-5">
+        <section ref={addToSectionRefs} className="mb-5">
           <h2 className="mb-3">
             <i className="fas fa-trophy mr-2" style={{ color: "#e8b923" }}></i>
-            Achievements
+            Competitive Programming
           </h2>
+          <p>
+            I'm an avid competitive programmer, actively participating in coding challenges and contests to sharpen my problem-solving skills. I maintain two profiles on Codeforces, where I tackle algorithmic problems and compete with developers worldwide.
+          </p>
           <ul className="list-unstyled ms-4">
             <li className="mb-2">
-              <i className="fas fa-check-circle mr-2" style={{ color: "#e8b923" }}></i>
-              Developed a secure API platform for [Your Company/Project], reducing response times by 30%.
+              <i className="fas fa-link mr-2" style={{ color: "#e8b923" }}></i>
+              <a href="https://codeforces.com/profile/Adham0" target="_blank" rel="noopener noreferrer">
+                Codeforces Profile: Adham0
+              </a>
             </li>
             <li className="mb-2">
-              <i className="fas fa-check-circle mr-2" style={{ color: "#e8b923" }}></i>
-              Conducted penetration testing for [Your Client/Project], identifying and mitigating critical vulnerabilities.
-            </li>
-            <li className="mb-2">
-              <i className="fas fa-check-circle mr-2" style={{ color: "#e8b923" }}></i>
-              Contributed to open-source projects, including [Your Project], enhancing community-driven development.
+              <i className="fas fa-link mr-2" style={{ color: "#e8b923" }}></i>
+              <a href="https://codeforces.com/profile/Adham_Hashem" target="_blank" rel="noopener noreferrer">
+                Codeforces Profile: Adham_Hashem
+              </a>
             </li>
           </ul>
-        </section> */}
+        </section>
 
         <section ref={addToSectionRefs} className="mb-5">
           <h2 className="mb-3">
