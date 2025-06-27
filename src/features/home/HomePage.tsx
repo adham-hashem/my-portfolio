@@ -29,20 +29,12 @@ const HomePage: React.FC = () => {
     }
   };
 
-  // Scroll to top only on initial mount
+  // Scroll to top on mount (simplified to match AboutPage)
   useEffect(() => {
-    // Set scroll position to top on initial mount
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    window.scrollTo({ top: 0, behavior: "auto" });
-
-    // Set initial container height
-    if (containerRef.current) {
-      setContainerHeight(containerRef.current.scrollHeight);
-    }
+    window.scrollTo(0, 0);
   }, []);
 
-  // Update container height on resize without affecting scroll position
+  // Update container height on resize
   useEffect(() => {
     const updateHeight = () => {
       if (containerRef.current) {
@@ -61,9 +53,9 @@ const HomePage: React.FC = () => {
         y: [-10, 10, -10],
         transition: {
           repeat: Infinity,
-          duration: 3, // Slower animation
+          duration: 3,
           ease: "easeInOut",
-          delay: 0.1, // Small delay to allow layout stabilization
+          delay: 0.1,
         },
       });
     }
@@ -84,7 +76,7 @@ const HomePage: React.FC = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       if (mainContentRef.current) {
-        mainContentRef.current.style.height = `${window.innerHeight}px`; // Sync with viewport
+        mainContentRef.current.style.height = `${window.innerHeight}px`;
       }
     };
     resizeCanvas();
@@ -123,53 +115,84 @@ const HomePage: React.FC = () => {
     };
   }, []);
 
-  // GSAP animations for other sections
+  // GSAP animations for main content and sections (aligned with AboutPage)
   useEffect(() => {
     if (mainContentRef.current) {
       gsap.fromTo(
         mainContentRef.current,
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: mainContentRef.current,
+            start: "top 80%",
+          },
+        }
       );
     }
 
     sectionRefs.current.forEach((section) => {
-      const img = section.querySelector("img");
-      const text = section.querySelectorAll("h2, p");
-      const button = section.querySelector(".learn-more-button");
+      const heading = section.querySelector("h2");
+      const content = section.querySelectorAll("p, .learn-more-button");
+      const image = section.querySelector("img");
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      if (img) {
-        tl.fromTo(
-          img,
-          { y: -50, opacity: 0, scale: 0.9 },
-          { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }
+      // Heading animation
+      if (heading) {
+        gsap.fromTo(
+          heading,
+          { opacity: 0, x: -50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+            },
+          }
         );
       }
 
-      if (text.length > 0) {
-        tl.fromTo(
-          text,
-          { opacity: 0, x: -30 },
-          { opacity: 1, x: 0, duration: 0.8, stagger: 0.2, ease: "power2.out" },
-          "-=0.5"
+      // Content animation
+      if (content.length > 0) {
+        gsap.fromTo(
+          content,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+            },
+          }
         );
       }
 
-      if (button) {
-        tl.fromTo(
-          button,
-          { opacity: 0, scale: 0.8 },
-          { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.7)" },
-          "-=0.4"
+      // Image animation
+      if (image) {
+        gsap.fromTo(
+          image,
+          { y: -50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              end: "bottom 20%",
+              scrub: 1,
+            },
+          }
         );
       }
     });
@@ -215,14 +238,8 @@ const HomePage: React.FC = () => {
             >
               <i className="fab fa-linkedin"></i>
             </a>
-            {/* <Link to="/projects" className="social-icon">
-              <i className="fas fa-briefcase"></i>
-            </Link> */}
           </div>
           <div className="button-container">
-            {/* <Link to="/projects" className="btn-grad">
-              View Projects
-            </Link> */}
             <a href="mailto:adhamhashem2025@gmail.com" className="btn-grad">
               Contact Me
             </a>
