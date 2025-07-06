@@ -341,7 +341,7 @@ const HomePage: React.FC = () => {
               <i className="fab fa-github"></i>
             </a>
             <a
-              href="https://linkedin.com/in/adham-hashem"
+              href="https://www.linkedin.com/in/adham-hashem-12ba59371"
               target="_blank"
               rel="noopener noreferrer"
               className="social-icon"
