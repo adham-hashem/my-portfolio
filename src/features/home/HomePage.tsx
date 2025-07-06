@@ -1,14 +1,18 @@
+// HomePage.tsx
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import { Bar } from "react-chartjs-2";
 import "./HomePage.css";
 import Header from "../../app/layout/Header";
 import Footer from "../../app/layout/Footer";
 import ScrollButtons from "../scrollButtons/ScrollButtons";
 
 gsap.registerPlugin(ScrollTrigger);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const HomePage: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -29,7 +33,7 @@ const HomePage: React.FC = () => {
     }
   };
 
-  // Scroll to top on mount (simplified to match AboutPage)
+  // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -46,14 +50,15 @@ const HomePage: React.FC = () => {
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
-  // Framer Motion animation for text (up and down)
+  // Framer Motion animation for text
   useEffect(() => {
     if (isInView) {
       textControls.start({
         y: [-10, 10, -10],
+        scale: [1, 1.05, 1],
         transition: {
           repeat: Infinity,
-          duration: 3,
+          duration: 4,
           ease: "easeInOut",
           delay: 0.1,
         },
@@ -61,7 +66,7 @@ const HomePage: React.FC = () => {
     }
   }, [isInView, textControls]);
 
-  // Particle background
+  // Particle background with connections
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -69,8 +74,8 @@ const HomePage: React.FC = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const particles: { x: number; y: number; vx: number; vy: number; radius: number }[] = [];
-    const particleCount = 50;
+    const particles: { x: number; y: number; vx: number; vy: number; radius: number; color: string }[] = [];
+    const particleCount = 60;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -86,15 +91,16 @@ const HomePage: React.FC = () => {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
         radius: Math.random() * 2 + 1,
+        color: `rgba(${Math.random() * 50 + 200}, ${Math.random() * 50 + 150}, 35, 0.7)`,
       });
     }
 
     const animateParticles = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
+      particles.forEach((p, i) => {
         p.x += p.vx;
         p.y += p.vy;
 
@@ -103,8 +109,22 @@ const HomePage: React.FC = () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(232, 185, 35, 0.6)";
+        ctx.fillStyle = p.color;
         ctx.fill();
+
+        // Draw lines to nearby particles
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const distance = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(232, 185, 35, ${1 - distance / 100})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
       });
       requestAnimationFrame(animateParticles);
     };
@@ -115,16 +135,16 @@ const HomePage: React.FC = () => {
     };
   }, []);
 
-  // GSAP animations for main content and sections (aligned with AboutPage)
+  // GSAP animations for main content and sections
   useEffect(() => {
     if (mainContentRef.current) {
       gsap.fromTo(
         mainContentRef.current,
-        { opacity: 0, y: 30 },
+        { opacity: 0, scale: 0.95 },
         {
           opacity: 1,
-          y: 0,
-          duration: 0.8,
+          scale: 1,
+          duration: 1,
           ease: "power3.out",
           scrollTrigger: {
             trigger: mainContentRef.current,
@@ -138,15 +158,17 @@ const HomePage: React.FC = () => {
       const heading = section.querySelector("h2");
       const content = section.querySelectorAll("p, .learn-more-button");
       const image = section.querySelector("img");
+      const chart = section.querySelector(".skills-chart");
 
       // Heading animation
       if (heading) {
         gsap.fromTo(
           heading,
-          { opacity: 0, x: -50 },
+          { opacity: 0, x: -50, scale: 0.9 },
           {
             opacity: 1,
             x: 0,
+            scale: 1,
             duration: 0.8,
             ease: "power3.out",
             scrollTrigger: {
@@ -161,10 +183,11 @@ const HomePage: React.FC = () => {
       if (content.length > 0) {
         gsap.fromTo(
           content,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 30, scale: 0.95 },
           {
             opacity: 1,
             y: 0,
+            scale: 1,
             duration: 0.8,
             stagger: 0.2,
             ease: "power2.out",
@@ -180,10 +203,11 @@ const HomePage: React.FC = () => {
       if (image) {
         gsap.fromTo(
           image,
-          { y: -50, opacity: 0 },
+          { y: -50, opacity: 0, scale: 0.9 },
           {
             y: 0,
             opacity: 1,
+            scale: 1,
             duration: 1,
             ease: "power2.out",
             scrollTrigger: {
@@ -195,12 +219,98 @@ const HomePage: React.FC = () => {
           }
         );
       }
+
+      // Chart animation
+      if (chart) {
+        gsap.fromTo(
+          chart,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+            },
+          }
+        );
+      }
     });
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
+
+  // Chart data for skills
+  const skillsData = {
+    labels: ["C++", "Python", "PHP", "C#", "SQL", "Cybersecurity"],
+    datasets: [
+      {
+        label: "Proficiency (%)",
+        data: [85, 90, 75, 80, 85, 70],
+        backgroundColor: [
+          "rgba(232, 185, 35, 0.8)",
+          "rgba(10, 61, 98, 0.8)",
+          "rgba(75, 0, 130, 0.8)",
+          "rgba(232, 185, 35, 0.8)",
+          "rgba(10, 61, 98, 0.8)",
+          "rgba(75, 0, 130, 0.8)",
+        ],
+        borderColor: [
+          "rgba(232, 185, 35, 1)",
+          "rgba(10, 61, 98, 1)",
+          "rgba(75, 0, 130, 1)",
+          "rgba(232, 185, 35, 1)",
+          "rgba(10, 61, 98, 1)",
+          "rgba(75, 0, 130, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+        labels: {
+          color: "#ffffff",
+        },
+      },
+      title: {
+        display: true,
+        text: "My Skills Proficiency",
+        color: "#ffffff",
+        font: {
+          size: 18,
+        },
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100,
+        ticks: {
+          color: "#ffffff",
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.2)",
+        },
+      },
+      x: {
+        ticks: {
+          color: "#ffffff",
+        },
+        grid: {
+          color: "rgba(255, 255, 255, 0.2)",
+        },
+      },
+    },
+  };
 
   return (
     <>
@@ -213,13 +323,13 @@ const HomePage: React.FC = () => {
             <motion.h1
               className="main-content-h1"
               animate={textControls}
-              initial={{ y: 0 }}
+              initial={{ y: 0, scale: 1 }}
             >
               ADHAM HASHEM
             </motion.h1>
           </div>
           <p className="main-content-p">
-            .NET Backend Developer & Cybersecurity Student
+            .NET Backend Developer & Cybersecurity Enthusiast
           </p>
           <div className="social-icons">
             <a
@@ -240,7 +350,7 @@ const HomePage: React.FC = () => {
             </a>
           </div>
           <div className="button-container">
-            <a href="mailto:adhamhashem2025@gmail.com" className="btn-grad">
+            <a href="mailto:adhamhashem2025@gmail.com" className="btn-grad pulse">
               Contact Me
             </a>
           </div>
