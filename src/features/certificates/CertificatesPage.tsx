@@ -18,6 +18,7 @@ const certificates = [
   { name: 'Ethical Hacking Certificate', file: 'Course-Certificate-En-(1).png' },
   { name: 'Computer Network Fundamentals Certificate', file: 'Course-Certificate-En.png' },
   { name: 'C# Basic Certificate', file: 'c-sharp-basic-certificate.png' },
+  { name: 'Javascript Intermediate Certificate', file: 'javascript_intermediate certificate.jpg' },
   { name: 'Python Basic Certificate', file: 'python-basic-certificate.png' },
   { name: 'SQL Basic Certificate', file: 'sql-basic-certificate.png' },
   { name: 'SQL Advanced Certificate', file: 'sql-advanced-certificate.png' },
