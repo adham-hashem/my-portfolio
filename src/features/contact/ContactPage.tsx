@@ -11,10 +11,13 @@ const ContactPage: React.FC = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [formStatus, setFormStatus] = useState<string>("");
 
-  const [copiedKey, setCopiedKey] = useState<"" | "email" | "phone">("");
+  // Updated type to include "whatsapp"
+  const [copiedKey, setCopiedKey] = useState<"" | "email" | "phone" | "whatsapp">("");
 
   const EMAIL = "adham.hashem@proton.me";
   const PHONE = "+20 101 398 9517";
+  const WHATSAPP_DISPLAY = "+20 101 398 9517";
+  const WHATSAPP_URL = "https://wa.me/201013989517";
 
   const GITHUB_URL = "https://github.com/adham-hashem";
   const LINKEDIN_URL =
@@ -100,7 +103,8 @@ const ContactPage: React.FC = () => {
     };
   }, []);
 
-  const copyToClipboard = async (text: string, key: "email" | "phone") => {
+  // Updated signature to include "whatsapp"
+  const copyToClipboard = async (text: string, key: "email" | "phone" | "whatsapp") => {
     try {
       await navigator.clipboard.writeText(text);
       setCopiedKey(key);
@@ -183,6 +187,33 @@ const ContactPage: React.FC = () => {
                   >
                     <i className="fas fa-copy me-2" />
                     {copiedKey === "email" ? "Copied!" : "Copy"}
+                  </button>
+                </li>
+
+                {/* WhatsApp */}
+                <li className="mb-2 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <div>
+                    <i className="fab fa-whatsapp me-2 accent-icon" />
+                    <strong>WhatsApp:</strong>{" "}
+                    <a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none" }}
+                    >
+                      {WHATSAPP_DISPLAY}
+                    </a>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="btn btn-outline-brand px-3 py-1"
+                    onClick={() => copyToClipboard(WHATSAPP_DISPLAY, "whatsapp")}
+                    aria-label="Copy whatsapp number"
+                    style={{ fontSize: 14 }}
+                  >
+                    <i className="fas fa-copy me-2" />
+                    {copiedKey === "whatsapp" ? "Copied!" : "Copy"}
                   </button>
                 </li>
 

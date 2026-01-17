@@ -172,11 +172,11 @@ const Header: React.FC = () => {
                 Certificates
               </Link>
             </li>
-            <li className="nav-item" ref={addToNavItemsRef}>
+            {/* <li className="nav-item" ref={addToNavItemsRef}>
               <Link className="nav-link" to="/contact" aria-label="Contact Page">
                 Contact
               </Link>
-            </li>
+            </li> */}
           </ul>
 
           <div className="contact-button-container">
