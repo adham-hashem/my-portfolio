@@ -183,17 +183,6 @@ const HomePage: React.FC = () => {
                 {/* Social links */}
                 <div className="hero-anim d-flex gap-2 flex-wrap mt-3">
                   <a
-                    href="https://github.com/adham-hashem"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-outline-brand px-4"
-                    aria-label="GitHub profile"
-                  >
-                    <i className="fab fa-github me-2" />
-                    GitHub
-                  </a>
-
-                  <a
                     href="https://www.linkedin.com/in/adham-hashem-12ba59371/?originalSubdomain=eg"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -201,7 +190,17 @@ const HomePage: React.FC = () => {
                     aria-label="LinkedIn profile"
                   >
                     <i className="fab fa-linkedin me-2" />
-                    LinkedIn
+                    {/* LinkedIn */}
+                  </a>
+                  <a
+                    href="https://github.com/adham-hashem"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline-brand px-4"
+                    aria-label="GitHub profile"
+                  >
+                    <i className="fab fa-github me-2" />
+                    {/* GitHub */}
                   </a>
                 </div>
               </div>
