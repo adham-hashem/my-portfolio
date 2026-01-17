@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Header from '../../app/layout/Header';
-import Footer from '../../app/layout/Footer';
-import './CertificatesPage.css';
+import React, { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Header from "../../app/layout/Header";
+import Footer from "../../app/layout/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,67 +26,68 @@ const certificates = [
 ];
 
 const CertificatesPage: React.FC = () => {
-
   useEffect(() => {
-    // Scroll to top on page load
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    window.scrollTo({ top: 0, behavior: "auto" });
 
-    // GSAP animations for certificate cards
     gsap.fromTo(
-      '.certificate-card',
-      { opacity: 0, y: 50 },
+      ".certificate-card",
+      { opacity: 0, y: 28 },
       {
         opacity: 1,
         y: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.certificate-card',
-          start: 'top 80%',
-          end: 'bottom 20%',
-        },
+        duration: 0.9,
+        stagger: 0.10,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".certificate-card", start: "top 85%" },
       }
     );
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 
   return (
-    <>
+    <div className="certificates-page">
       <Header />
+
       <div className="container-fluid main-background-color py-5">
-        <h1 className="text-white text-center mb-5">
-          My <span className="main-color">Certificates</span>
-        </h1>
-        <div className="row">
-          {certificates.map((certificate, index) => (
-            <div key={index} className="col-md-4 col-sm-6 mb-4">
-              <div className="card h-3 bg-dark text-white shadow-lg certificate-card">
-                <div className="card-body text-center">
-                  <h5 className="card-title text-white">{certificate.name}</h5>
-                  <a
-                    href={`/images/certificates/${certificate.file}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={`/images/certificates/${certificate.file}`}
-                      alt={certificate.name}
-                      className="img-fluid rounded shadow-sm"
-                      style={{ maxHeight: '200px', objectFit: 'contain' }}
-                    />
-                  </a>
+        <div className="container">
+          <h1 className="text-center mb-2" style={{ fontWeight: 800 }}>
+            My <span className="main-color">Certificates</span>
+          </h1>
+
+          <p className="text-center certificates-hint mb-4">
+            Click any certificate to open the full image.
+          </p>
+
+          <div className="row">
+            {certificates.map((certificate, index) => (
+              <div key={index} className="col-md-4 col-sm-6 mb-4">
+                <div className="card h-100 certificate-card">
+                  <div className="card-body text-center">
+                    <h5 className="card-title" style={{ fontWeight: 700 }}>
+                      {certificate.name}
+                    </h5>
+
+                    <a href={`images/certificates/${certificate.file}`} target="_blank" rel="noopener noreferrer">
+                      <img
+                        src={`images/certificates/${certificate.file}`}
+                        alt={certificate.name}
+                        className="img-fluid"
+                        style={{ maxHeight: 220, objectFit: "contain" }}
+                      />
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
+
       <Footer />
-    </>
+    </div>
   );
 };
 

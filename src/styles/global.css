@@ -1,0 +1,436 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap");
+
+/* =========================
+   Global theme (Light + .NET violet)
+   ========================= */
+:root {
+  --brand: #512bd4;            /* .NET violet-like */
+  --brand-2: #7c3aed;          /* secondary violet */
+  --brand-3: #4b0082;          /* indigo */
+
+  --bg: #ffffff;
+  --bg-2: #f7f7fb;
+  --surface: #ffffff;
+
+  --text: #0f172a;             /* slate-900 */
+  --muted: #475569;            /* slate-600 */
+  --muted-2: rgba(15, 23, 42, 0.72);
+
+  --border: #e5e7eb;           /* gray-200 */
+  --shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
+  --shadow-soft: 0 12px 26px rgba(15, 23, 42, 0.08);
+
+  --radius: 16px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica Neue, Arial, sans-serif;
+}
+
+/* Keep bootstrap spacing utilities working nicely */
+body {
+  margin: 0;
+}
+
+/* Basic links */
+a {
+  color: var(--brand);
+}
+
+a:hover {
+  color: var(--brand-2);
+}
+
+/* =========================
+   Global helpers (keep your old class names)
+   ========================= */
+.main-background-color {
+  background-color: var(--bg) !important;
+}
+
+.div-background-color {
+  background-color: var(--bg-2) !important;
+}
+
+.rounded-div {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.main-color {
+  color: var(--brand) !important;
+}
+
+.main-color-background {
+  background-color: var(--brand) !important;
+}
+
+/* generic cards */
+.app-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+}
+
+.app-card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.app-card-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(81, 43, 212, 0.22);
+  box-shadow: var(--shadow);
+}
+
+/* =========================
+   Buttons (shared old class names)
+   ========================= */
+.learn-more-button,
+.nextButton,
+.contact-us-button {
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(81, 43, 212, 0.25);
+  color: #fff;
+  background: linear-gradient(45deg, var(--brand) 0%, var(--brand-2) 60%, var(--brand-3) 100%);
+  box-shadow: 0 14px 28px rgba(81, 43, 212, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.learn-more-button:hover,
+.nextButton:hover,
+.contact-us-button:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 18px 36px rgba(81, 43, 212, 0.22);
+  filter: saturate(1.05);
+  color: #fff;
+}
+
+.btn-outline-brand {
+  border-radius: 999px;
+  border: 1px solid rgba(81, 43, 212, 0.35);
+  color: var(--brand);
+  background: transparent;
+  font-weight: 700;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.btn-outline-brand:hover {
+  background: rgba(81, 43, 212, 0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(81, 43, 212, 0.10);
+  color: var(--brand);
+}
+
+/* =========================
+   Navbar (Header)
+   ========================= */
+.app-navbar {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(247, 247, 251, 0.92) 55%,
+    rgba(81, 43, 212, 0.08) 100%
+  );
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(81, 43, 212, 0.12);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+  position: relative;
+  z-index: 1000;
+}
+
+.app-navbar .particle-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.app-navbar .container-fluid {
+  position: relative;
+  z-index: 2;
+}
+
+.app-navbar .navbar-brand {
+  font-weight: 800;
+  font-size: 1.55rem;
+  background: linear-gradient(45deg, var(--brand), var(--brand-2), var(--text));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.app-navbar .navbar-brand:hover {
+  transform: translateY(-1px) scale(1.02);
+  filter: drop-shadow(0 0 12px rgba(81, 43, 212, 0.25));
+}
+
+.app-navbar .nav-link {
+  color: var(--text) !important;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem !important;
+  position: relative;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.app-navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 7px;
+  transform: translateX(-50%);
+  height: 2px;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  transition: width 0.25s ease;
+}
+
+.app-navbar .nav-link:hover::after {
+  width: calc(100% - 2.2rem);
+}
+
+.app-navbar .nav-link:hover {
+  color: var(--brand) !important;
+  transform: translateY(-1px);
+}
+
+.app-navbar .navbar-toggler {
+  border-color: rgba(81, 43, 212, 0.35) !important;
+}
+
+.app-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23512BD4' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* mobile menu panel */
+@media (max-width: 768px) {
+  .app-navbar .navbar-collapse {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(81, 43, 212, 0.12);
+    padding: 1rem 0;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+  }
+
+  .app-navbar .contact-us-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* =========================
+   Footer
+   ========================= */
+.footer-container {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f7fb 100%);
+  border-top: 1px solid rgba(81, 43, 212, 0.12);
+  box-shadow: 0 -12px 26px rgba(15, 23, 42, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-container .particle-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.footer-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+.footer-logo-text {
+  background: linear-gradient(45deg, var(--brand), var(--brand-2), var(--text));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-link {
+  color: var(--text);
+  text-decoration: none;
+  margin: 0 1.1rem;
+  font-weight: 600;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.footer-link:hover {
+  color: var(--brand);
+  transform: translateY(-1px);
+}
+
+.footer-icon {
+  color: var(--brand);
+  font-size: 26px;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.footer-icon:hover {
+  transform: scale(1.14) rotate(2deg);
+  color: var(--brand-2);
+}
+
+.footer-sep {
+  opacity: 0.7;
+  border-color: rgba(81, 43, 212, 0.35);
+}
+
+/* =========================
+   Pages: About / Contact etc
+   ========================= */
+.about-page .lead,
+.contact-page .lead,
+.certificates-hint {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.accent-icon {
+  color: var(--brand) !important;
+}
+
+/* Contact inputs */
+.contact-page .form-control {
+  background: #fff;
+  color: var(--text);
+  border: 1px solid rgba(81, 43, 212, 0.22);
+}
+
+.contact-page .form-control:focus {
+  border-color: rgba(81, 43, 212, 0.50);
+  box-shadow: 0 0 0 4px rgba(81, 43, 212, 0.12);
+}
+
+.contact-page .input-group-text {
+  background: #fff;
+  border: 1px solid rgba(81, 43, 212, 0.22);
+  color: var(--brand);
+}
+
+/* Certificates cards */
+.certificate-card {
+  background: #fff;
+  border: 1px solid rgba(81, 43, 212, 0.16);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.certificate-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(81, 43, 212, 0.30);
+  box-shadow: var(--shadow);
+}
+
+.certificate-card img {
+  border-radius: 12px;
+  background: rgba(81, 43, 212, 0.03);
+  border: 1px solid var(--border);
+  padding: 10px;
+}
+
+/* Services */
+.service-card {
+  background: #fff;
+  border: 1px solid rgba(81, 43, 212, 0.16);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(81, 43, 212, 0.30);
+  box-shadow: var(--shadow);
+}
+
+.service-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, var(--brand), var(--brand-2));
+  color: #fff;
+  box-shadow: 0 14px 28px rgba(81, 43, 212, 0.16);
+}
+
+.service-desc {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.service-chip {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(81, 43, 212, 0.08);
+  border: 1px solid rgba(81, 43, 212, 0.16);
+  color: var(--text);
+  font-size: 0.85rem;
+  margin: 6px 6px 0 0;
+}
+
+/* Scroll buttons */
+.scroll-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.scroll-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 999px;
+  border: 1px solid rgba(81, 43, 212, 0.22);
+  color: #fff;
+  background: linear-gradient(45deg, var(--brand) 0%, var(--brand-2) 60%, var(--brand-3) 100%);
+  box-shadow: 0 14px 28px rgba(81, 43, 212, 0.16);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-button:hover {
+  transform: translateY(-1px) scale(1.06);
+  box-shadow: 0 18px 36px rgba(81, 43, 212, 0.20);
+}
+
+@media (max-width: 768px) {
+  .scroll-buttons {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .scroll-button {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+}

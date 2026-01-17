@@ -1,217 +1,200 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 import Header from "../../app/layout/Header";
 import Footer from "../../app/layout/Footer";
 import ScrollButtons from "../scrollButtons/ScrollButtons";
-import "./AboutPage.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AboutPage = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+const AboutPage: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerHeight, setContainerHeight] = useState(0);
   const sectionRefs = useRef<HTMLElement[]>([]);
 
-  // Add refs to sections
   const addToSectionRefs = (el: HTMLElement | null) => {
-    if (el && !sectionRefs.current.includes(el)) {
-      sectionRefs.current.push(el);
-    }
+    if (el && !sectionRefs.current.includes(el)) sectionRefs.current.push(el);
   };
 
-  // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Measure container height
   useEffect(() => {
     const updateHeight = () => {
-      if (containerRef.current) {
-        setContainerHeight(containerRef.current.scrollHeight);
-      }
+      if (containerRef.current) setContainerHeight(containerRef.current.scrollHeight);
     };
     updateHeight();
     window.addEventListener("resize", updateHeight);
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
-  // GSAP animations
   useEffect(() => {
     sectionRefs.current.forEach((section) => {
       const heading = section.querySelector("h2");
       const content = section.querySelectorAll("p, ul, li, a");
       const image = section.querySelector("img");
 
-      // Heading animation
       if (heading) {
         gsap.fromTo(
           heading,
-          { opacity: 0, x: -50 },
+          { opacity: 0, x: -30 },
           {
             opacity: 1,
             x: 0,
             duration: 0.8,
             ease: "power3.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top 80%",
-            },
+            scrollTrigger: { trigger: section, start: "top 80%" },
           }
         );
       }
 
-      // Content animation
       if (content.length > 0) {
         gsap.fromTo(
           content,
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 18 },
           {
             opacity: 1,
             y: 0,
             duration: 0.8,
-            stagger: 0.2,
+            stagger: 0.12,
             ease: "power2.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top 80%",
-            },
+            scrollTrigger: { trigger: section, start: "top 80%" },
           }
         );
       }
 
-      // Image animation
       if (image) {
         gsap.fromTo(
           image,
-          { y: -50, opacity: 0 },
+          { y: -18, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: 0.9,
             ease: "power2.out",
-            scrollTrigger: {
-              trigger: section,
-              start: "top 80%",
-              end: "bottom 20%",
-              scrub: 1,
-            },
+            scrollTrigger: { trigger: section, start: "top 80%", end: "bottom 20%", scrub: 1 },
           }
         );
       }
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
 
   return (
     <div className="about-page">
       <Header />
+
       <div
         ref={containerRef}
-        className="container-fluid text-white main-background-color px-3 py-3"
+        className="container-fluid main-background-color px-3 py-4"
         style={{ minHeight: "100vh" }}
       >
-        <section ref={addToSectionRefs} className="mb-5">
-          <h2 className="mb-3">
-            <i className="fas fa-user mr-2" style={{ color: "#e8b923" }}></i>
-            About Adham Hashem
-          </h2>
-          <p className="lead">
-            I'm a passionate .NET Backend Developer and Cybersecurity Student based in Damietta, Egypt.
-          </p>
-        </section>
-
-        <section ref={addToSectionRefs} className="mb-5">
-          <div className="row">
-            <div className="col-md-6 mb-4">
-              <h2 className="mb-3">
-                <i className="fas fa-graduation-cap mr-2" style={{ color: "#e8b923" }}></i>
-                Background & Expertise
+        <div className="container">
+          <div className="app-card app-card-hover p-4">
+            <section ref={addToSectionRefs} className="mb-4">
+              <h2 className="mb-2" style={{ fontWeight: 800 }}>
+                <i className="fas fa-user me-2 accent-icon" />
+                About Adham Hashem
               </h2>
-              <p>
-                I developed a strong foundation in software engineering and cybersecurity. My professional journey includes working on backend systems using .NET Core and C#.
+              <p className="lead mb-0">
+                I'm a passionate .NET Backend Developer and Cybersecurity Student based in Damietta, Egypt.
               </p>
-              <ul className="list-unstyled ms-4">
+            </section>
+
+            <section ref={addToSectionRefs} className="mb-4">
+              <div className="row align-items-center g-4">
+                <div className="col-md-6">
+                  <h2 className="mb-2" style={{ fontWeight: 800 }}>
+                    <i className="fas fa-graduation-cap me-2 accent-icon" />
+                    Background & Expertise
+                  </h2>
+
+                  <p className="mb-3" style={{ color: "var(--muted)" }}>
+                    Strong foundation in software engineering and cybersecurity with focus on clean backend delivery.
+                  </p>
+
+                  <ul className="list-unstyled ms-2 mb-0" style={{ color: "var(--muted)" }}>
+                    <li className="mb-2">
+                      <i className="fas fa-code me-2 accent-icon" />
+                      <strong>Backend:</strong> .NET Core, C#, SQL, APIs.
+                    </li>
+                    <li className="mb-2">
+                      <i className="fas fa-shield-alt me-2 accent-icon" />
+                      <strong>Security:</strong> secure coding & best practices.
+                    </li>
+                    <li className="mb-0">
+                      <i className="fas fa-cloud me-2 accent-icon" />
+                      <strong>Cloud:</strong> Azure.
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="col-md-6">
+                  <img
+                    src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80"
+                    className="img-fluid"
+                    alt="Adham Hashem"
+                    style={{
+                      borderRadius: 16,
+                      border: "1px solid var(--border)",
+                      boxShadow: "var(--shadow-soft)",
+                    }}
+                  />
+                </div>
+              </div>
+            </section>
+
+            <section ref={addToSectionRefs} className="mb-4">
+              <h2 className="mb-2" style={{ fontWeight: 800 }}>
+                <i className="fas fa-trophy me-2 accent-icon" />
+                Competitive Programming
+              </h2>
+
+              <p className="mb-2" style={{ color: "var(--muted)" }}>
+                Active participation in algorithmic contests to sharpen problem-solving skills.
+              </p>
+
+              <ul className="list-unstyled ms-2 mb-0">
                 <li className="mb-2">
-                  <i className="fas fa-code mr-2" style={{ color: "#e8b923" }}></i>
-                  <strong>Backend Development:</strong> .NET Core, C#, PHP, SQL databases
+                  <i className="fas fa-link me-2 accent-icon" />
+                  <a href="https://codeforces.com/profile/Adham0" target="_blank" rel="noopener noreferrer">
+                    Codeforces Profile Adham0
+                  </a>
                 </li>
-                <li className="mb-2">
-                  <i className="fas fa-shield-alt mr-2" style={{ color: "#e8b923" }}></i>
-                  <strong>Cybersecurity:</strong> secure coding
-                </li>
-                <li className="mb-2">
-                  <i className="fas fa-cloud mr-2" style={{ color: "#e8b923" }}></i>
-                  <strong>Cloud Technologies:</strong> Azure
+                <li className="mb-0">
+                  <i className="fas fa-link me-2 accent-icon" />
+                  <a href="https://codeforces.com/profile/AdhamHashem" target="_blank" rel="noopener noreferrer">
+                    Codeforces Profile AdhamHashem
+                  </a>
                 </li>
               </ul>
-            </div>
-            <div className="col-md-6 mb-4">
-              <img
-                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80"
-                className="img-fluid rounded shadow-lg"
-                alt="Adham Hashem"
-              />
-            </div>
+            </section>
+
+            <section ref={addToSectionRefs} className="text-center">
+              <h2 className="mb-2" style={{ fontWeight: 800 }}>
+                <i className="fas fa-paper-plane me-2 accent-icon" />
+                Let's Connect
+              </h2>
+
+              <p className="mb-3" style={{ color: "var(--muted)" }}>
+                Reach out to collaborate on backend systems, security, or full-stack projects.
+              </p>
+
+              <Link to="/contact" className="btn learn-more-button px-4 py-2">
+                Contact Me
+              </Link>
+            </section>
           </div>
-        </section>
 
-        <section ref={addToSectionRefs} className="mb-5">
-          <h2 className="mb-3">
-            <i className="fas fa-trophy mr-2" style={{ color: "#e8b923" }}></i>
-            Competitive Programming
-          </h2>
-          <p>
-            I'm an avid competitive programmer, actively participating in coding challenges and contests to sharpen my problem-solving skills. I maintain two profiles on Codeforces, where I tackle algorithmic problems and compete with developers worldwide.
-          </p>
-          <ul className="list-unstyled ms-4">
-            <li className="mb-2">
-              <i className="fas fa-link mr-2" style={{ color: "#e8b923" }}></i>
-              <a href="https://codeforces.com/profile/Adham0" target="_blank" rel="noopener noreferrer">
-                Codeforces Profile: Adham0
-              </a>
-            </li>
-            <li className="mb-2">
-              <i className="fas fa-link mr-2" style={{ color: "#e8b923" }}></i>
-              <a href="https://codeforces.com/profile/Adham_Hashem" target="_blank" rel="noopener noreferrer">
-                Codeforces Profile: Adham_Hashem
-              </a>
-            </li>
-          </ul>
-        </section>
-
-        <section ref={addToSectionRefs} className="mb-5">
-          <h2 className="mb-3">
-            <i className="fas fa-heart mr-2" style={{ color: "#e8b923" }}></i>
-            Personal Interests
-          </h2>
-          <p>
-            Beyond coding and cybersecurity, I enjoy exploring new technologies, and staying active through chess, reading and more. I'm also passionate about mentoring aspiring developers and sharing knowledge through blogs and talks.
-          </p>
-        </section>
-
-        <section ref={addToSectionRefs} className="mb-5 text-center">
-          <h2 className="mb-3">
-            <i className="fas fa-paper-plane mr-2" style={{ color: "#e8b923" }}></i>
-            Let's Connect
-          </h2>
-          <p>
-            I'm always excited to collaborate on innovative projects or discuss the latest in backend development and cybersecurity. Reach out to start a conversation!
-          </p>
-          <div className="mt-4">
-            <Link to="/contact" className="btn py-2 px-5 learn-more-button">
-              Contact Me
-            </Link>
-          </div>
-        </section>
-
-        <ScrollButtons containerHeight={containerHeight} />
+          <ScrollButtons containerHeight={containerHeight} />
+        </div>
       </div>
+
       <Footer />
     </div>
   );
