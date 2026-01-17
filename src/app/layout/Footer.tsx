@@ -1,7 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faTwitter, faWhatsapp, faFacebook } from "@fortawesome/free-brands-svg-icons";
+import {
+  faWhatsapp,
+  faFacebook,
+  faGithub,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 import gsap from "gsap";
 
 type Particle = {
@@ -103,12 +108,20 @@ const Footer: React.FC = () => {
 
     if (linksRef.current) {
       const links = linksRef.current.querySelectorAll("a");
-      gsap.fromTo(links, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.75, stagger: 0.1 });
+      gsap.fromTo(
+        links,
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.75, stagger: 0.1 }
+      );
     }
 
     if (socialsRef.current) {
       const icons = socialsRef.current.querySelectorAll("svg");
-      gsap.fromTo(icons, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1 });
+      gsap.fromTo(
+        icons,
+        { opacity: 0, scale: 0.9 },
+        { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1 }
+      );
     }
   }, []);
 
@@ -133,16 +146,39 @@ const Footer: React.FC = () => {
       </div>
 
       <div ref={socialsRef} className="mb-4 social-icons d-flex justify-content-center gap-4">
-        {/* <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <FontAwesomeIcon icon={faInstagram} className="footer-icon" />
+        <a
+          href="https://github.com/adham-hashem"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+        >
+          <FontAwesomeIcon icon={faGithub} className="footer-icon" />
         </a>
-        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-          <FontAwesomeIcon icon={faTwitter} className="footer-icon" />
-        </a> */}
-        <a href="https://wa.me/201013989517" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+
+        <a
+          href="https://www.linkedin.com/in/adham-hashem-12ba59371/?originalSubdomain=eg"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
+          <FontAwesomeIcon icon={faLinkedin} className="footer-icon" />
+        </a>
+
+        <a
+          href="https://wa.me/201013989517"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+        >
           <FontAwesomeIcon icon={faWhatsapp} className="footer-icon" />
         </a>
-        <a href="https://www.facebook.com/adham4040" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+
+        <a
+          href="https://www.facebook.com/adham4040"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
           <FontAwesomeIcon icon={faFacebook} className="footer-icon" />
         </a>
       </div>
@@ -157,4 +193,3 @@ const Footer: React.FC = () => {
 };
 
 export default Footer;
-
