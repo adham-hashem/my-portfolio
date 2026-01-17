@@ -223,34 +223,6 @@ const ContactPage: React.FC = () => {
                   />
                 </li>
 
-                {/* GitHub */}
-                <li className="mb-2 d-flex align-items-center justify-content-between flex-wrap gap-2">
-                  <div>
-                    <i className="fab fa-github me-2 accent-icon" />
-                    <strong>GitHub:</strong>{" "}
-                    <a
-                      href={GITHUB_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: "none" }}
-                    >
-                      adham-hashem
-                    </a>
-                  </div>
-
-                  <a
-                    className="btn btn-outline-brand px-3 py-1"
-                    href={GITHUB_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Open GitHub"
-                    style={{ fontSize: 14 }}
-                  >
-                    <i className="fas fa-external-link-alt me-2" />
-                    Open
-                  </a>
-                </li>
-
                 {/* LinkedIn */}
                 <li className="mb-2 d-flex align-items-center justify-content-between flex-wrap gap-2">
                   <div>
@@ -272,6 +244,34 @@ const ContactPage: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Open LinkedIn"
+                    style={{ fontSize: 14 }}
+                  >
+                    <i className="fas fa-external-link-alt me-2" />
+                    Open
+                  </a>
+                </li>
+
+                {/* GitHub */}
+                <li className="mb-2 d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <div>
+                    <i className="fab fa-github me-2 accent-icon" />
+                    <strong>GitHub:</strong>{" "}
+                    <a
+                      href={GITHUB_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: "none" }}
+                    >
+                      adham-hashem
+                    </a>
+                  </div>
+
+                  <a
+                    className="btn btn-outline-brand px-3 py-1"
+                    href={GITHUB_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Open GitHub"
                     style={{ fontSize: 14 }}
                   >
                     <i className="fas fa-external-link-alt me-2" />
