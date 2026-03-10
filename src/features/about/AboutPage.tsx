@@ -168,7 +168,7 @@ const AboutPage: React.FC = () => {
                 </li>
                 <li className="mb-0">
                   <i className="fas fa-link me-2 accent-icon" />
-                  <a href="https://codeforces.com/profile/AdhamHashem" target="_blank" rel="noopener noreferrer">
+                  <a href="https://codeforces.com/profile/Adham_Hashem" target="_blank" rel="noopener noreferrer">
                     Codeforces Profile AdhamHashem
                   </a>
                 </li>
