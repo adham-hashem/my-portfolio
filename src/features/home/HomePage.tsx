@@ -183,7 +183,7 @@ const HomePage: React.FC = () => {
                 {/* Social links */}
                 <div className="hero-anim d-flex gap-2 flex-wrap mt-3">
                   <a
-                    href="https://www.linkedin.com/in/adham-hashem-12ba59371/?originalSubdomain=eg"
+                    href="https://www.linkedin.com/in/adham-elbeshbeshy-12ba59371"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-outline-brand px-4"
