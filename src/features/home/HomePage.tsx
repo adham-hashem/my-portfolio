@@ -205,6 +205,7 @@ const HomePage: React.FC = () => {
                 </div>
               </div>
 
+
               {/* PERSONAL IMAGE */}
               <div className="col-lg-5">
                 <div className="hero-anim app-card p-3" style={{ textAlign: "center" }}>
