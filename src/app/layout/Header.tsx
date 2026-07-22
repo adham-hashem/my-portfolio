@@ -128,7 +128,7 @@ const Header: React.FC = () => {
 
   return (
     <nav
-      ref={(el) => (navbarRef.current = el)}
+      ref={navbarRef}
       className="navbar navbar-expand-sm navbar-light sticky-top app-navbar"
       aria-label="Main navigation"
     >

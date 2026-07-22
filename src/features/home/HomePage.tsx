@@ -37,7 +37,9 @@ const HomePage: React.FC = () => {
 
   const heroInView = useInView(heroRef, { margin: "-20% 0px -20% 0px", once: true });
 
-  useEffect(() => window.scrollTo(0, 0), []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     const updateHeight = () => {
