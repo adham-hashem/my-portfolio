@@ -14,7 +14,7 @@ const ContactPage: React.FC = () => {
   // Updated type to include "whatsapp"
   const [copiedKey, setCopiedKey] = useState<"" | "email" | "phone" | "whatsapp">("");
 
-  const EMAIL = "adham.hashem@proton.me";
+  const EMAIL = "adham.h.elbeshbeshy@gmail.com";
   const PHONE = "+20 101 398 9517";
   const WHATSAPP_DISPLAY = "+20 101 398 9517";
   const WHATSAPP_URL = "https://wa.me/201013989517";

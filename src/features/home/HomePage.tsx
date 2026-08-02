@@ -212,14 +212,13 @@ const HomePage: React.FC = () => {
               <div className="col-lg-5">
                 <div className="hero-anim app-card p-3" style={{ textAlign: "center" }}>
                   <img
-                    src="/images/Me.jpg"
+                    src="/images/Me2.jpg"
                     alt="Adham Hashem"
                     className="img-fluid"
                     style={{
                       width: "100%",
                       maxWidth: 360,
-                      aspectRatio: "1 / 1",
-                      objectFit: "cover",
+                      height: "auto",
                       borderRadius: 18,
                       border: `1px solid rgba(${BRAND_PRIMARY}, 0.18)`,
                       boxShadow: "var(--shadow)",
